@@ -1,0 +1,26 @@
+---
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: httpd-rs
+  labels:
+    author: nani
+    type: webserver
+  spec:
+   replicas: 4
+   selector:
+    matchLabels:
+     type: webserver
+   template:
+    metadata:
+     name: httpd-pod
+     labels:
+      type: webserver
+    spec:
+     containers:
+       - name: myhttpd
+         image: httpd
+         ports:
+           - ContainerPort: 80
+             hostPort: 8888
+
